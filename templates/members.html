@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>登録選手一覧ページ</title>
+    <link href="./static/css/color.css" rel="stylesheet" type="text/css" media="all">
+    <link href="./static/css/details.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+    <div>
+        <table class="table table-hover table-condensed">
+            <div style="display: flex" class="form-floating mb-1 fs-5">
+                <span>{{teamname}} </span>
+                <form action="/" method="get">
+                    <!-- <input type="submit" value='トップ'> -->
+                    <button type="submit" name="update" value={{teamname}}>トップ</button>
+                </form>
+                <form action="/members" method="get">
+                    <!-- <input type="submit" value='更新'> -->
+                    <button type="submit" name="update" value={{teamname}}>更新</button>
+                </form>
+                </p>
+                <thead class="sticky-top table text-white bg-success fs-5 lh-1">
+                    <tr>
+                        <th>番号</th>
+                        <th>名前</th>
+                        <th>カード</th>
+                        <th>レベル</th>
+                        <th>出身国</th>
+                        <th>リーグ</th>
+                        <th>クラブ</th>
+                        <th>ポジション</th>
+                        <th>PAC</th>
+                        <th>SHO</th>
+                        <th>PAS</th>
+                        <th>DRI</th>
+                        <th>DEF</th>
+                        <th>PHY</th>
+                    </tr>
+                </thead>
+                <tbody class="fs-6">
+                    {% for item in data %}
+                    {% if item[2]=="シーズン最優秀チーム" %}
+                    <tr class="color-blue">
+                        {% elif item[2]=="決勝への道" %}
+                    <tr class="color-kessho">
+                        {% elif item[3]|int>=75 %}
+                    <tr class="color-gold">
+                        {% elif item[3]|int>=65 %}
+                    <tr class="color-silver">
+                        {% elif item[3]|int<=64 %} <tr class="color-copper">
+                            {% elif item[3] %}
+                            <!-- {% else %} -->
+                    <tr class="color-white">
+                        {% endif %}
+                        {% if loop.index <=11 %} <td>先発{{loop.index}}</td>
+                            {% elif loop.index <=18 %} <td>控え{{loop.index}}</td>
+                                {% else %}
+                                <td>サブ{{loop.index}}</td>
+                                {% endif %}
+                                <form method="POST">
+                                    <td>
+                                        <input type="submit" value="設定">
+                                        <select id="playername" name="playername"
+                                            style="background-color: rgba(255, 255, 255, 0.8);">
+                                            {% for player in playersdata %}
+                                            {% if player==item[1] %}
+                                            <option value="{{player|e}},{{loop.index}}" selected>{{player|e}}
+                                            </option>
+                                            {% else %}
+                                            <option value="{{player|e}},{{loop.index}}">{{player|e}}
+                                            </option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <!-- <script>
+                                            let cardSelect=document.getElementById("card");
+                                            cardSelect.addEventListener("change", changePlayer);
+                                            function changePlayer(){
+                                                let player=cardSelect.value;
+                                            }
+                                        </script> -->
+                                    </td>
+                                    <td>
+                                        <select id="card" name="card"
+                                            style="background-color: rgba(255, 255, 255, 0.8);">
+                                            {% for card in carddata %}
+                                            {% if card==item[2] %}
+                                            <option value={{ card|e }} selected>{{ card|e }}</option>
+                                            {% else %}
+                                            <option value={{ card|e }}>{{ card|e }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </form>
+                                <!-- <td>{{item[2]}}</td> -->
+                                <td>{{item[3]}}</td>
+                                <td>{{item[4]}}</td>
+                                <td>{{item[5]}}</td>
+                                <td>{{item[6]}}</td>
+                                <td>{{item[7]}}</td>
+                                <td>{{item[8]}}</td>
+                                <td>{{item[9]}}</td>
+                                <td>{{item[10]}}</td>
+                                <td>{{item[11]}}</td>
+                                <td>{{item[12]}}</td>
+                                <td>{{item[13]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

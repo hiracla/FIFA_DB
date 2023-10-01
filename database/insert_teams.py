@@ -1,0 +1,128 @@
+from my_functions import open_database
+from my_functions import close_database
+
+conn, cursor = open_database("fifa23.db")
+params = [
+    (
+        "YouyizENG",
+        "4-3-2-1",
+        "F.LAMPARD",
+        "NAVAS","",
+        "ALEXANDER-ARNOLD", "",
+        "DIEGO CARLOS", "",
+        "KOULIBALY", "",
+        "ZINCHENKO", "",
+        "LUCAS MOURA", "",
+        "BRUNO GUIMARAES", "",
+        "RICE", "",
+        "SON", "",
+        "NUNEZ", "",
+        "FULLKRUG", "",
+        "RENAN LODI", "",
+        "PERSIC", "",
+        "STONES", "",
+        "LAPORTE", "",
+        "KANTE", "",
+        "RUBEN NEVES", "",
+        "MATHEUS CHUNHA", "",
+        "ALISSON", "",
+        "GABRIEL JESUS", "",
+        "RICARDO PEREIRA", "",
+        "KOVACIC", "",
+        "IBRAHIMOVIC",""
+    ),
+    (
+        "YouyizESP",
+        "4-4-2",
+        "IRAOLA",
+        "TER STEGEN", "",
+        "JESUS NAVAS", "",
+        "DAVID GARCIA", "",
+        "INIGO MARTINEZ", "",
+        "JAVI GALAN", "",
+        "CANALES", "",
+        "GABRI VEIGA", "",
+        "MERINO", "",
+        "OYAZABAL", "",
+        "IAGO ASPAS", "",
+        "GRIEZMANN", "",
+        "LUCAS VAZQUES", "",
+        "MUNIAIN", "",
+        "GIMENEZ", "",
+        "GABRIEL PAULISTA", "",
+        "SERGI DARDER", "",
+        "KOKE", "",
+        "CORREA", "",
+        "INAKI WILLIAMS", "",
+        "UNAI SIMON", "",
+        "TSYGANKOV", "",
+        "MAVIDID", "",
+        "RAKITIC",""
+    ),
+    (
+        "YouyizGER",
+        "4-2-3-1",
+        "M",
+        "SOMMER", "",
+        "FRIMPONG", "",
+        "HERNANDEZ", "",
+        "SCHLOTTERBECK", "",
+        "JOAO CANCELO", "",
+        "HOFMANN", "",
+        "DELANEY", "",
+        "BRANDT", "",
+        "SZOBOSZLAI", "",
+        "MUSIALA", "",
+        "KOLO MUANI", "",
+        "TRAPP", "",
+        "GRIFO", "",
+        "ANGELINO", "",
+        "NDICKA", "",
+        "HUMMELS", "",
+        "DOAN", "",
+        "FULLKRUG", "",
+        "CAN", "",
+        "ENDO", "",
+        "KAMADA", "",
+        "SANE", "",
+        "NUNEZ",""
+    ),
+    (
+        "YouyizJ",
+        "4-4-2",
+        "M",
+        "NAKAMURA", "",
+        "TOMIYASU", "",
+        "HASEBE", "",
+        "YOSHIDA", "",
+        "OGAWA", "",
+        "DOAN", "",
+        "ENDO", "",
+        "KAMADA", "",
+        "SAITO", "",
+        "SAITO", "",
+        "FURUHASHI", "",
+        "ENDO", "",
+        "SUZUKI", "",
+        "ITAKURA", "",
+        "WATANABE", "",
+        "MORITA", "",
+        "OKUGAWA", "",
+        "ONAIWU", "",
+        "KAWASHIMA", "",
+        "MINAMINO", "",
+        "HASHIOKA", "",
+        "ITO", "",
+        "NAKAJIMA",""
+    ),
+]
+
+sql = """
+INSERT INTO teams(teamname, system, director, member01, card01,member02,card02, member03, card03, member04, card04, member05, card05, member06, card06, member07, card07, member08, card08, member09, card09, member10, card10, member11, card11, member12, card12, member13, card13, member14, card14, member15, card15, member16, card16, member17, card17, member18, card18, reserve01, card19, reserve02, card20, reserve03, card21, reserve04, card22, reserve05, card23
+)
+VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+"""
+cursor.executemany(sql, params)
+
+conn.commit()
+close_database(cursor, conn)

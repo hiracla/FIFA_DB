@@ -1,0 +1,42 @@
+@charset “UTF-8”;
+
+.color-gold {
+    background-color: gold;
+}
+
+.color-silver {
+    background-color: silver;
+}
+
+.color-copper {
+    background-color: #ffca99;
+}
+
+.color-white {
+    background-color: whitesmoke;
+}
+
+.color-blue {
+    background-color: blue;
+    color: yellow;
+}
+
+.color-totw {
+    background-color: black;
+    color: yellow;
+}
+
+.color-kessho {
+    background-color: black;
+    color: white;
+}
+
+.color-future {
+    background-color: purple;
+    color: yellow;
+}
+
+.table-hover tbody tr:hover td {
+    background: aqua;
+}
+

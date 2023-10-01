@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>チーム一覧ページ</title>
+    <link href="./static/css/color.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+    <div class="form-floating mb-3">
+        <form>
+            <!-- <form action='/result'> -->
+            <span>＜新規登録＞</span>
+            <label>チーム名<input type="text" size="10" name="team"></label>
+            <label>システム<input type="text" size="10" name="system"></label>
+            <label>監督<input type="text" size="5" name="director"></label>
+            <button type="submit" name="register" formmethod="POST" formaction='/team_register'>登録</button>
+            <button type="submit" name="update" formmethod="POST" formaction='/team_update'>更新</button>
+            <button type="submit" name="detail" formmethod="GET" formaction='/players'>全プレイヤー</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-striped table-hover">
+            <thead class="table sticky-top text-white bg-success">
+                <tr>
+                    <th style="width: 7%">詳細</th>
+                    <th style="width: 10%">No.</th>
+                    <th style="width: 15%">Team</th>
+                    <th style="width: 15%">System</th>
+                    <th>監督</th>
+                </tr>
+            </thead>
+        </table>
+        {% for item in data %}
+        <details>
+            <summary>
+                <caption>{{item[1]}}</caption>
+                <table class="table">
+                    <tr>
+                        <td style="width: 7%">{{item[0]}}</td>
+                        <td style="width: 10%">
+                            <form action="/members">
+                                <button type="submit" formmethod="GET" name="teamname" value='{{item[1]}}'>詳細</button>
+                            </form>
+                        </td>
+                        <td style="width: 15%">{{item[1]}}</td>
+                        <td style="width: 15%">{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                    </tr>
+                </table>
+            </summary>
+            <table class="table" border="2">
+                <tr>
+                    <thead class="table text-white bg-info">
+                        <th></th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                    </thead>
+                </tr>
+                <tr>
+                    <td>先発</td>
+                    {% for i in range(11) %}
+                    {% set cnt = 4+(i*2) %}
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>種類</td>
+                    {% for i in range(11) %}
+                    {% set cnt = 5+(i*2) %}
+                    <!-- {% if item[cnt]=="シーズン最優秀チーム" %}
+                    <td class="color-blue">{{item[cnt]}}</td>
+                    {% elif item[cnt]=="決勝への道" %}
+                    <td class="color-kessho">{{item[cnt]}}</td>
+                    {% elif item[cnt]=="フューチャースター" %}
+                    <td class="color-future">{{item[cnt]}}</td>
+                    {% elif item[2]=="TOTW" %}
+                    <td class="color-totw">{{item[cnt]}}</td>
+                    {% elif item[3]|int>=75 %}
+                    <td class="color-gold">{{item[cnt]}}</td>
+                    {% elif item[3]|int>=65 %}
+                    <td class="color-silver">{{item[cnt]}}</td>
+                    {% elif item[3]|int<=64 %} <td class="color-copper">{{item[cnt]}}</td>
+                        {% elif item[3] %}
+                        <td class="color-white">{{item[cnt]}}</td>
+                        {% endif %} -->
+
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>サブ</td>
+                    {% for i in range(7) %}
+                    {% set cnt = 26+(i*2) %}
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+                <tr scope="row">
+                    <td>種類</td>
+                    {% for i in range(7) %}
+                    {% set cnt = 27+(i*2) %}
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>控え</td>
+                    {% for i in range(7) %}
+                    {% set cnt = 40+(i*2) %}
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>種類</td>
+                    {% for i in range(7) %}
+                    {% set cnt = 41+(i*2) %}
+                    <td>{{item[cnt]}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </details>
+        </table>
+    </div>
+    {% endfor %}
+    <!-- </tbody> -->
+    <!-- </table> -->
+    <!-- </div> -->
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>選手一覧ページ</title>
+    <link href="./static/css/color.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+    <div class="form-inline mb-3">
+        <form>
+            <!-- <div class="container-flluid" style="position:fixed; top:0;left:0"> -->
+            <!-- <p>＜新規登録＞</p> -->
+            <label for="floatingInput"><input type="number" class="form-control" size="2" min="1" max="99" name="level"
+                    placeholder="レベル"></label>
+            <label for="floatingInput"><input type="text" class="form-control" size="15" name="name" placeholder="名前"></label>
+
+            <!-- <label for="floatingInput"><input type="text" class="form-control" size="10" name="card"
+                    placeholder="カード"></label> -->
+            <!-- 既出のカードをプルダウンメニューに入れる -->
+            <input type="text" name="card" list="card" placeholder="カード" autocomplete="off">
+            <datalist id="card">
+                {% for item in carddata %}
+                <option value={{ item|e }}>
+                    {% endfor %}
+            </datalist>
+
+            <label for="floatingInput">
+                <input type="text" class="form-control" size="5" name="country" placeholder="出身国">
+            </label>
+            <label for="floatingInput">
+                <input type="text" class="form-control" size="3" name="league" placeholder="リーグ">
+            </label>
+            <!-- 既出のクラブをプルダウンメニューに入れる -->
+            <input type="text" name="club" list="club" placeholder="クラブ" autocomplete="off">
+            <datalist id="club">
+                {% for item in clubdata %}
+                <option value={{ item|e }}>
+                    {% endfor %}
+            </datalist>
+            <label for="floatingInput"><input type="text" class="form-control" size="3" name="position"
+                    placeholder="ポジション"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="pace"
+                    placeholder="走力"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="shoot"
+                    placeholder="シュート力"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="pass"
+                    placeholder="パス"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="dribble"
+                    placeholder="ドリブル"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="defense"
+                    placeholder="守備力"></label>
+            <label for="floatingInput"><input type="number" class="form-control" min="1" max="99" name="physical"
+                    placeholder="フィジカル"></label>
+            <button type="submit" name="register" formmethod="POST" formaction='/register'>登録</button>
+            <button type="submit" name="update" formmethod="POST" formaction='/update'>更新</button>
+        </form>
+    </div>
+    <div>
+        <!-- <table class="table table-striped table-hover"> -->
+        <table class="table table-hover">
+            <thead class="sticky-top table text-white bg-primary">
+                <tr>
+                    <form action="/" method="get"><input type="submit" value='トップ'>
+                        <th>名前</th>
+                        <th>カード</th>
+                        <th>レベル</th>
+                        <th>出身国</th>
+                        <th>リーグ</th>
+                        <th>クラブ</th>
+                        <th>ポジション</th>
+                        <th>走力</th>
+                        <th>シュート力</th>
+                        <th>パス</th>
+                        <th>ドリブル</th>
+                        <th>守備力</th>
+                        <th>フィジカル</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                {% if item[2]=="シーズン最優秀チーム" %}
+                <tr class="color-blue">
+                    {% elif item[2]=="決勝への道" %}
+                <tr class="color-kessho">
+                    {% elif item[2]=="フューチャースター" %}
+                <tr class="color-future">
+                    {% elif item[2]=="TOTW" %}
+                <tr class="color-totw">
+                    {% elif item[3]|int>=75 %}
+                <tr class="color-gold">
+                    {% elif item[3]|int>=65 %}
+                <tr class="color-silver">
+                    {% elif item[3]|int<=64 %} <tr class="color-copper">
+                        {% elif item[3] %}
+                <tr class="color-white">
+                    {% endif %}
+                    <!-- <td>{{item[0]}}</td> -->
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                    <td>{{item[7]}}</td>
+                    <td>{{item[8]}}</td>
+                    <td>{{item[9]}}</td>
+                    <td>{{item[10]}}</td>
+                    <td>{{item[11]}}</td>
+                    <td>{{item[12]}}</td>
+                    <td>{{item[13]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
